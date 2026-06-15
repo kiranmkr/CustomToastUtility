@@ -1,9 +1,7 @@
 //
 //  CustomNavigationView.swift
-//  CustomToastUtility
-//
-//  Created by macpro on 15/06/2026.
-//
+//  SwiftCoreUtilities
+
 
 #if os(macOS)
 import SwiftUI

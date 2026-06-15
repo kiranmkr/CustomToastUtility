@@ -1,9 +1,7 @@
 //
 //  ToastModifier.swift
-//  CustomToastUtility
-//
-//  Created by macpro on 15/06/2026.
-//
+//  SwiftCoreUtilities
+
 
 import SwiftUI
 
