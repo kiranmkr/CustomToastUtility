@@ -30,4 +30,19 @@ public struct CurrencyParser {
         
         return (number.doubleValue, symbol)
     }
+    
+    public static func parseCurrency(_ string: String) -> (value: Double, symbol: String, isLeft: Bool) {
+        let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        let symbol = trimmed.filter { !"0123456789., ".contains($0) }
+        let finalSymbol = symbol.isEmpty ? "$" : symbol
+        
+        let numericString = trimmed.filter { "0123456789.".contains($0) || $0 == "," }
+        let cleanNumeric = numericString.replacingOccurrences(of: ",", with: "")
+        let value = Double(cleanNumeric) ?? 0.0
+        
+        let isLeft = trimmed.hasPrefix(finalSymbol)
+        
+        return (value, finalSymbol, isLeft)
+    }
 }
