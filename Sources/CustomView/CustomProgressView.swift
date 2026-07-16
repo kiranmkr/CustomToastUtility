@@ -7,8 +7,19 @@ import SwiftUI
 
 public struct CustomProgressView: View {
     
+    private static let defaultSize: CGFloat = 32
+    private static let padding: CGFloat = 16
+    
     public let size: CGFloat
     public let cornerRadius: CGFloat
+    
+    private var safeSize: CGFloat {
+        (size.isFinite && size > 0) ? size : Self.defaultSize
+    }
+    
+    private var totalSize: CGFloat {
+        safeSize + Self.padding
+    }
     
     @inlinable
     public init(size: CGFloat = 32, cornerRadius: CGFloat = 12) {
@@ -17,8 +28,6 @@ public struct CustomProgressView: View {
     }
     
     public var body: some View {
-        let totalSize = size.isFinite ? (size + 16) : 48
-        let safeSize = size.isFinite ? size : 32
         
         ZStack {
             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)

@@ -11,19 +11,23 @@ public struct CustomNavigationView<Sidebar: View, Detail: View>: View {
     
     public let sidebar: Sidebar
     public let detail: Detail
-    
+    public let size: CGFloat
+
     @inlinable
-    public init(@ViewBuilder sidebar: () -> Sidebar, @ViewBuilder detail: () -> Detail) {
+    public init(@ViewBuilder sidebar: () -> Sidebar, @ViewBuilder detail: () -> Detail, size: CGFloat = 200) {
         self.sidebar = sidebar()
         self.detail = detail()
+        self.size = size
     }
     
     public var body: some View {
         
+        let safeSize = (size.isFinite && size > 0) ? size : 200
+        
         if #available(macOS 13.0, *) {
             NavigationSplitView {
                 sidebar
-                    .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 200)
+                    .navigationSplitViewColumnWidth(min: safeSize, ideal: safeSize, max: safeSize)
                 
             } detail: {
                 detail

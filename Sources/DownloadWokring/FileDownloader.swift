@@ -106,12 +106,12 @@ public struct FileDownloader {
 #if os(macOS)
         
         let picker = NSSharingServicePicker(items: [fileURL])
-        if let keyWindow = NSApplication.shared.keyWindow,
-           let contentView = keyWindow.contentView {
+        if let window = NSApp.keyWindow ?? NSApp.windows.first,
+           let contentView = window.contentView {
             picker.show(
-                relativeTo: contentView.bounds,
+                relativeTo: .zero,
                 of: contentView,
-                preferredEdge: .maxY
+                preferredEdge: .minY
             )
         }
         

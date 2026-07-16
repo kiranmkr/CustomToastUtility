@@ -36,8 +36,8 @@ public final class ReviewManager: Sendable {
             
 #if os(macOS)
             if #available(macOS 14.0, *) {
-                let validWindow = NSApplication.shared.windows.first { $0.isKeyWindow && $0.contentViewController != nil }
-                ?? NSApplication.shared.windows.first { $0.contentViewController != nil }
+                let validWindow = NSApp.windows.first { $0.isKeyWindow && $0.contentViewController != nil }
+                ?? NSApp.windows.first { $0.contentViewController != nil }
                 
                 if let rootVC = validWindow?.contentViewController {
                     AppStore.requestReview(in: rootVC)
