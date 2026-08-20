@@ -46,13 +46,17 @@ public final class ReviewManager: Sendable {
                 SKStoreReviewController.requestReview()
             }
 #elseif os(iOS)
-            let activeScene = UIApplication.shared.connectedScenes
-                .filter { $0.activationState == .foregroundActive }
-                .compactMap { $0 as? UIWindowScene }
-                .first
-            
-            if let scene = activeScene {
-                AppStore.requestReview(in: scene)
+            if #available(iOS 16.0, *) {
+                let activeScene = UIApplication.shared.connectedScenes
+                    .filter { $0.activationState == .foregroundActive }
+                    .compactMap { $0 as? UIWindowScene }
+                    .first
+                
+                if let scene = activeScene {
+                    AppStore.requestReview(in: scene)
+                }
+            } else {
+                AppStore.requestReview()
             }
 #endif
         }
