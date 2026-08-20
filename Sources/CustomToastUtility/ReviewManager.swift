@@ -56,7 +56,7 @@ public final class ReviewManager: Sendable {
                     AppStore.requestReview(in: scene)
                 }
             } else {
-                AppStore.requestReview()
+                SKStoreReviewController.requestReview()
             }
 #endif
         }
